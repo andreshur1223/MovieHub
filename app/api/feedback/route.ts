@@ -48,35 +48,31 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const validatedData = feedbackSchema.parse(body)
 
-    // Check if required environment variables are set
-    if (!process.env.RESEND_API_KEY) {
-      console.error('RESEND_API_KEY no está configurado')
-      return NextResponse.json(
-        { message: 'Servicio de feedback temporalmente no disponible. Por favor, contacta directamente a marketing@midominio.com' },
-        { status: 503 }
-      )
-    }
+    // MODO DEMO ACTIVO - Sin dependencias de Resend
+    // TODO: Configurar RESEND_API_KEY y FEEDBACK_TO_EMAIL en Vercel para habilitar envío de emails
 
-    if (!process.env.FEEDBACK_TO_EMAIL) {
-      console.error('FEEDBACK_TO_EMAIL no está configurado')
-      return NextResponse.json(
-        { message: 'Servicio de feedback temporalmente no disponible. Por favor, contacta directamente a marketing@midominio.com' },
-        { status: 503 }
-      )
-    }
+    // TEMPORAL: Modo demo sin envío de email
+    // TODO: Configurar RESEND_API_KEY en Vercel para habilitar envío de emails
+    console.log('Feedback recibido (modo demo):', {
+      name: validatedData.name,
+      email: validatedData.email,
+      message: validatedData.message,
+      ip: ip,
+      timestamp: new Date().toISOString()
+    })
 
-    // Create Resend instance only when needed and with validation
-    let resend
-    try {
-      resend = new Resend(process.env.RESEND_API_KEY)
-    } catch (error) {
-      console.error('Error creando instancia de Resend:', error)
-      return NextResponse.json(
-        { message: 'Error de configuración del servicio de email' },
-        { status: 500 }
-      )
-    }
+    // Simular respuesta exitosa
+    return NextResponse.json(
+      { 
+        message: '¡Feedback recibido! Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.',
+        demo: true,
+        note: 'Modo demo activo - Para recibir emails, configura RESEND_API_KEY en Vercel'
+      },
+      { status: 200 }
+    )
 
+    /* CÓDIGO ORIGINAL PARA CUANDO SE CONFIGURE RESEND:
+    
     // Send email using Resend
     const { data, error } = await resend.emails.send({
       from: 'MovieHub <noreply@midominio.com>',
@@ -139,6 +135,8 @@ Para responder al usuario, utiliza el email: ${validatedData.email}
       { message: 'Feedback enviado exitosamente', id: data?.id },
       { status: 200 }
     )
+    
+    */
 
   } catch (error) {
     console.error('Error en API feedback:', error)

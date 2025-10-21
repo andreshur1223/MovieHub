@@ -109,6 +109,11 @@ export function FeedbackForm({ className = '' }: FeedbackFormProps) {
         <p className="text-muted-foreground text-center">
           Tu opinión es importante para nosotros. Comparte tus ideas, sugerencias o comentarios.
         </p>
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-4">
+          <p className="text-sm text-blue-800 text-center">
+            <strong>Modo Demo:</strong> Los mensajes se registran en consola. Para recibir emails, configura RESEND_API_KEY en Vercel.
+          </p>
+        </div>
       </CardHeader>
       
       <CardContent>
