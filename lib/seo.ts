@@ -24,8 +24,10 @@ export function generateMetadata({
   tags = []
 }: SEOProps = {}): Metadata {
   const fullTitle = title.includes('Hub de Campaña') ? title : `${title} | Hub de Campaña Cinematográfica`
+  const siteUrl = process.env.SITE_URL || 'http://localhost:3000'
   
   return {
+    metadataBase: new URL(siteUrl),
     title: fullTitle,
     description,
     keywords: ['película', 'campaña', 'marketing', 'cinema', 'tráiler', 'making of', ...tags],
