@@ -194,6 +194,36 @@ SITE_URL=https://midominio.com
 NEXT_PUBLIC_ENV=prod
 ```
 
+## 🌐 Despliegue en GitHub Pages
+
+1) Configura el base path según tu repo (por ejemplo `MovieHub`):
+
+```
+echo NEXT_PUBLIC_BASE_PATH=/MovieHub >> .env.local
+```
+
+2) Exporta el sitio estático:
+
+```
+pnpm export
+```
+
+3) Publica en GitHub Pages (rama `gh-pages`):
+
+```
+pnpm deploy:gh
+```
+
+4) URL final:
+
+```
+https://andreshur1223.github.io/MovieHub/
+```
+
+Notas:
+- `next.config.js` ya está preparado: `output: 'export'`, `basePath`, `assetPrefix`, `images.unoptimized`, `trailingSlash`.
+- Se incluye `public/.nojekyll` para evitar conflictos con Jekyll.
+
 ## 🚀 Despliegue en Vercel (Recomendado)
 
 ### Configuración Automática
