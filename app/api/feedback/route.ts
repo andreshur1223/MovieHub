@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { z } from 'zod'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 const feedbackSchema = z.object({
   name: z.string().min(1, 'El nombre es requerido').max(100, 'El nombre es demasiado largo'),
   email: z.string().email('Email inválido'),
@@ -66,6 +64,9 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       )
     }
+
+    // Create Resend instance only when needed
+    const resend = new Resend(process.env.RESEND_API_KEY)
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
