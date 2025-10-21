@@ -7,7 +7,7 @@ import { Calendar, ArrowLeft, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { formatDateShort, getPhaseLabel, getPhaseColor } from '@/lib/utils'
 import type { Pieza } from '@/lib/data'
-import { marked } from 'marked'
+import { renderMarkdown } from '@/lib/markdown'
 
 interface MDXContentProps {
   pieza: Pieza
@@ -114,7 +114,7 @@ export function MDXContent({ pieza, nextPieza, previousPieza }: MDXContentProps)
 
       {/* Content */}
       <div className="prose prose-lg max-w-none">
-        <div dangerouslySetInnerHTML={{ __html: marked(pieza.body.code) }} />
+        <div dangerouslySetInnerHTML={{ __html: renderMarkdown(pieza.body.code) }} />
       </div>
 
       {/* Navigation */}

@@ -3,7 +3,7 @@ import { Badge } from '@/components/ui/badge'
 import { getEstrategia } from '@/lib/contentlayer'
 import { generateMetadata } from '@/lib/seo'
 import { Target, Users, Megaphone, MessageSquare, BarChart3, CheckCircle } from 'lucide-react'
-import { marked } from 'marked'
+import { renderMarkdown } from '@/lib/markdown'
 
 export const metadata = generateMetadata({
   title: 'Estrategia de Campaña',
@@ -161,7 +161,7 @@ export default function EstrategiaPage() {
 
               {/* MDX Content */}
               <div className="prose prose-lg max-w-none">
-                <div dangerouslySetInnerHTML={{ __html: marked(estrategia.body.code) }} />
+                <div dangerouslySetInnerHTML={{ __html: renderMarkdown(estrategia.body.code) }} />
               </div>
 
           {/* KPIs Section */}
