@@ -52,21 +52,30 @@ export async function POST(request: NextRequest) {
     if (!process.env.RESEND_API_KEY) {
       console.error('RESEND_API_KEY no está configurado')
       return NextResponse.json(
-        { message: 'Error de configuración del servidor' },
-        { status: 500 }
+        { message: 'Servicio de feedback temporalmente no disponible. Por favor, contacta directamente a marketing@midominio.com' },
+        { status: 503 }
       )
     }
 
     if (!process.env.FEEDBACK_TO_EMAIL) {
       console.error('FEEDBACK_TO_EMAIL no está configurado')
       return NextResponse.json(
-        { message: 'Error de configuración del servidor' },
-        { status: 500 }
+        { message: 'Servicio de feedback temporalmente no disponible. Por favor, contacta directamente a marketing@midominio.com' },
+        { status: 503 }
       )
     }
 
-    // Create Resend instance only when needed
-    const resend = new Resend(process.env.RESEND_API_KEY)
+    // Create Resend instance only when needed and with validation
+    let resend
+    try {
+      resend = new Resend(process.env.RESEND_API_KEY)
+    } catch (error) {
+      console.error('Error creando instancia de Resend:', error)
+      return NextResponse.json(
+        { message: 'Error de configuración del servicio de email' },
+        { status: 500 }
+      )
+    }
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
