@@ -3,5 +3,11 @@
   "outputDirectory": ".next",
   "framework": "nextjs",
   "installCommand": "pnpm install",
-  "devCommand": "pnpm dev"
+  "devCommand": "pnpm dev",
+  "regions": ["iad1"],
+  "functions": {
+    "app/api/feedback/route.ts": {
+      "maxDuration": 10
+    }
+  }
 }

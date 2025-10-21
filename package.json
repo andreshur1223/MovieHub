@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "contentlayer": "contentlayer build",
-    "postbuild": "contentlayer build"
+    "postbuild": "contentlayer build",
+    "vercel-build": "pnpm build",
+    "preview": "next build && next start",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-icons": "^1.3.0",

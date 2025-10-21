@@ -194,21 +194,54 @@ SITE_URL=https://midominio.com
 NEXT_PUBLIC_ENV=prod
 ```
 
-## 🚀 Despliegue
+## 🚀 Despliegue en Vercel (Recomendado)
 
-### Vercel (Recomendado)
+### Configuración Automática
 
-1. Conecta tu repositorio a Vercel
-2. Configura las variables de entorno en el dashboard
-3. Despliega automáticamente
+1. **Conecta tu repositorio a Vercel:**
+   - Ve a [vercel.com](https://vercel.com)
+   - Inicia sesión con tu cuenta de GitHub
+   - Haz clic en "New Project"
+   - Importa tu repositorio `andreshur1223/MovieHub`
 
-### Otros Proveedores
+2. **Configuración automática:**
+   - Vercel detectará automáticamente que es un proyecto Next.js
+   - Usará la configuración de `vercel.json`
+   - El build command será: `pnpm build`
 
-El proyecto es compatible con cualquier proveedor que soporte Next.js:
+3. **Variables de entorno:**
+   En el dashboard de Vercel, ve a Settings → Environment Variables y añade:
+   ```
+   RESEND_API_KEY=tu_api_key_de_resend
+   FEEDBACK_TO_EMAIL=tu_email@dominio.com
+   SITE_URL=https://tu-proyecto.vercel.app
+   NEXT_PUBLIC_ENV=prod
+   ```
 
-- **Netlify**: Configura build command: `pnpm build`
-- **Railway**: Despliega directamente desde GitHub
-- **DigitalOcean App Platform**: Configura como aplicación Node.js
+4. **Despliegue:**
+   - Haz clic en "Deploy"
+   - Vercel construirá y desplegará automáticamente
+   - Tu sitio estará disponible en: `https://tu-proyecto.vercel.app`
+
+### Actualizaciones Futuras
+
+Para actualizar tu sitio:
+1. Haz cambios en tu código local
+2. Commit y push a GitHub:
+   ```bash
+   git add .
+   git commit -m "Descripción de los cambios"
+   git push origin main
+   ```
+3. Vercel detectará automáticamente los cambios y desplegará una nueva versión
+
+### Dominio Personalizado
+
+Para usar tu propio dominio:
+1. Ve a Settings → Domains en Vercel
+2. Añade tu dominio personalizado
+3. Configura los DNS según las instrucciones de Vercel
+4. Actualiza `SITE_URL` en las variables de entorno
 
 ## 🔧 Scripts Disponibles
 
