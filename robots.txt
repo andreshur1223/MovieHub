@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://midominio.com/sitemap.xml
+
+# Disallow admin areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /content/
+
+# Allow important pages
+Allow: /
+Allow: /piezas/
+Allow: /estrategia/
+Allow: /feedback/
