@@ -1,6 +1,5 @@
 'use client'
 
-import { useMDXComponent } from 'next-contentlayer/hooks'
 import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -8,6 +7,7 @@ import { Calendar, ArrowLeft, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { formatDateShort, getPhaseLabel, getPhaseColor } from '@/lib/utils'
 import type { Pieza } from '@/lib/data'
+import { marked } from 'marked'
 
 interface MDXContentProps {
   pieza: Pieza
@@ -55,8 +55,6 @@ const mdxComponents = {
 }
 
 export function MDXContent({ pieza, nextPieza, previousPieza }: MDXContentProps) {
-  const MDXComponent = useMDXComponent(pieza.body.code)
-
   return (
     <article className="max-w-4xl mx-auto">
       {/* Header */}
@@ -116,7 +114,7 @@ export function MDXContent({ pieza, nextPieza, previousPieza }: MDXContentProps)
 
       {/* Content */}
       <div className="prose prose-lg max-w-none">
-        <MDXComponent components={mdxComponents} />
+        <div dangerouslySetInnerHTML={{ __html: marked(pieza.body.code) }} />
       </div>
 
       {/* Navigation */}

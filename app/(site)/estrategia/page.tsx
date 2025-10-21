@@ -3,6 +3,7 @@ import { Badge } from '@/components/ui/badge'
 import { getEstrategia } from '@/lib/contentlayer'
 import { generateMetadata } from '@/lib/seo'
 import { Target, Users, Megaphone, MessageSquare, BarChart3, CheckCircle } from 'lucide-react'
+import { marked } from 'marked'
 
 export const metadata = generateMetadata({
   title: 'Estrategia de Campaña',
@@ -158,10 +159,10 @@ export default function EstrategiaPage() {
             </div>
           </div>
 
-          {/* MDX Content */}
-          <div className="prose prose-lg max-w-none">
-            <div dangerouslySetInnerHTML={{ __html: estrategia.body.code }} />
-          </div>
+              {/* MDX Content */}
+              <div className="prose prose-lg max-w-none">
+                <div dangerouslySetInnerHTML={{ __html: marked(estrategia.body.code) }} />
+              </div>
 
           {/* KPIs Section */}
           <div className="mt-12 p-6 bg-gray-50 rounded-lg">

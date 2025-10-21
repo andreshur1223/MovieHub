@@ -22,6 +22,7 @@
     "framer-motion": "11.11.17",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.546.0",
+    "marked": "^16.4.1",
     "next": "14.0.4",
     "next-contentlayer": "^0.3.4",
     "next-seo": "^6.4.0",
