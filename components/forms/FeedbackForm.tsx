@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
+import { CheckCircle, AlertCircle, Loader2, Star } from 'lucide-react'
+import { useComments } from '@/lib/CommentsContext'
 
 interface FeedbackFormProps {
   className?: string
@@ -16,6 +17,7 @@ interface FormData {
   name: string
   email: string
   message: string
+  rating: number
   consent: boolean
 }
 
@@ -29,6 +31,7 @@ export function FeedbackForm({ className = '' }: FeedbackFormProps) {
     name: '',
     email: '',
     message: '',
+    rating: 5,
     consent: false
   })
   
@@ -36,6 +39,16 @@ export function FeedbackForm({ className = '' }: FeedbackFormProps) {
     status: 'idle',
     message: ''
   })
+
+  // Intentar usar el contexto, pero no fallar si no está disponible
+  let addComment: ((comment: any) => void) | null = null
+  try {
+    const commentsContext = useComments()
+    addComment = commentsContext.addComment
+  } catch (error) {
+    // Contexto no disponible, continuar sin él
+    console.log('CommentsContext no disponible, funcionando sin carrusel')
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -51,35 +64,31 @@ export function FeedbackForm({ className = '' }: FeedbackFormProps) {
     setFormState({ status: 'loading', message: '' })
 
     try {
-      const response = await fetch('/api/feedback', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      // Simular envío exitoso sin API
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      
+      // Agregar comentario al carrusel si está disponible
+      if (addComment) {
+        addComment({
           name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        }),
-      })
-
-      if (response.ok) {
-        setFormState({
-          status: 'success',
-          message: '¡Gracias por tu feedback! Te responderemos pronto.'
-        })
-        setFormData({ name: '', email: '', message: '', consent: false })
-      } else {
-        const error = await response.json()
-        setFormState({
-          status: 'error',
-          message: error.message || 'Error al enviar el formulario. Inténtalo de nuevo.'
+          comment: formData.message,
+          rating: formData.rating,
+          email: formData.email
         })
       }
+      
+      setFormState({
+        status: 'success',
+        message: addComment 
+          ? '¡Gracias por tu feedback! Tu comentario ya aparece en el carrusel.'
+          : '¡Gracias por tu feedback! Te responderemos pronto.'
+      })
+      setFormData({ name: '', email: '', message: '', rating: 5, consent: false })
+      
     } catch (error) {
       setFormState({
         status: 'error',
-        message: 'Error de conexión. Inténtalo de nuevo más tarde.'
+        message: 'Error al enviar el formulario. Inténtalo de nuevo.'
       })
     }
   }
@@ -111,7 +120,7 @@ export function FeedbackForm({ className = '' }: FeedbackFormProps) {
         </p>
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-4">
           <p className="text-sm text-blue-800 text-center">
-            <strong>Modo Demo:</strong> Los mensajes se registran en consola. Para recibir emails, configura RESEND_API_KEY en Vercel.
+            <strong>Modo Demo:</strong> Los comentarios se agregan al carrusel en tiempo real. Para envío de emails, configura la API de feedback.
           </p>
         </div>
       </CardHeader>
@@ -148,6 +157,39 @@ export function FeedbackForm({ className = '' }: FeedbackFormProps) {
                 disabled={formState.status === 'loading'}
               />
             </div>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium mb-2">
+              Calificación de la película *
+            </label>
+            <div className="flex gap-1">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <button
+                  key={star}
+                  type="button"
+                  onClick={() => setFormData(prev => ({ ...prev, rating: star }))}
+                  disabled={formState.status === 'loading'}
+                  title={`Calificar con ${star} estrella${star > 1 ? 's' : ''}`}
+                  className="focus:outline-none"
+                >
+                  <Star
+                    className={`w-6 h-6 ${
+                      star <= formData.rating
+                        ? 'text-yellow-400 fill-current'
+                        : 'text-gray-300'
+                    } hover:text-yellow-400 transition-colors`}
+                  />
+                </button>
+              ))}
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              {formData.rating === 1 && 'Muy mala'}
+              {formData.rating === 2 && 'Mala'}
+              {formData.rating === 3 && 'Regular'}
+              {formData.rating === 4 && 'Buena'}
+              {formData.rating === 5 && 'Excelente'}
+            </p>
           </div>
           
           <div>

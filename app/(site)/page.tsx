@@ -15,7 +15,7 @@ export default function HomePage() {
     name: 'El Universo Cinematográfico',
     description: 'Descubre el universo completo de nuestra próxima película. Tráilers, making-of, posters oficiales y toda la estrategia detrás del lanzamiento.',
     image: '/images/og-default.jpg',
-    trailer: 'https://www.youtube.com/watch?v=example',
+    trailer: 'https://www.youtube.com/watch?v=zvahPW14Qos',
     datePublished: '2024-01-15',
     director: 'Director Ejemplo',
     genre: 'Drama',
@@ -35,7 +35,7 @@ export default function HomePage() {
         title="El Universo Cinematográfico"
         subtitle="Descubre el universo completo de nuestra próxima película. Tráilers, making-of, posters oficiales y toda la estrategia detrás del lanzamiento."
         backgroundImage="/images/hero-bg.jpg"
-        videoUrl="https://www.youtube.com/embed/example"
+        videoUrl="https://www.youtube.com/embed/zvahPW14Qos"
         ctaText="Ver Tráiler"
         ctaHref="#trailer"
         secondaryCtaText="Explorar Piezas"

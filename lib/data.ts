@@ -39,7 +39,7 @@ export const piezasData: Pieza[] = [
     title: "Tráiler Oficial - El Universo Cinematográfico",
     slug: "trailer-oficial",
     summary: "Descubre el primer vistazo oficial a nuestra próxima película. Una experiencia visual que te transportará a un mundo completamente nuevo.",
-    cover: "/images/trailer-cover.jpg",
+    cover: "/images/tron-3.jpg",
     mediaType: "video",
     videoUrl: "https://www.youtube.com/embed/example-trailer",
     tags: ["tráiler", "oficial", "lanzamiento", "cinematográfico"],
@@ -50,7 +50,7 @@ export const piezasData: Pieza[] = [
     featured: true,
     seoTitle: "Tráiler Oficial - El Universo Cinematográfico",
     seoDescription: "Descubre el primer vistazo oficial a nuestra próxima película. Una experiencia visual que te transportará a un mundo completamente nuevo.",
-    ogImage: "/images/trailer-og.jpg",
+    ogImage: "/images/tron-3.jpg",
     url: "/piezas/trailer-oficial",
     body: {
       code: `
@@ -102,7 +102,7 @@ Este es solo el comienzo. Mantente atento para:
     title: "Making Of - Detrás de Escenas",
     slug: "making-of-detras-escenas",
     summary: "Sumérgete en el proceso creativo detrás de El Universo Cinematográfico. Descubre cómo se crearon las escenas más impactantes.",
-    cover: "/images/making-of-cover.jpg",
+    cover: "/images/tron-10.jpg",
     mediaType: "video",
     videoUrl: "https://www.youtube.com/embed/example-making-of",
     tags: ["making of", "detrás de escenas", "producción", "creativo"],
@@ -113,7 +113,7 @@ Este es solo el comienzo. Mantente atento para:
     featured: true,
     seoTitle: "Making Of - Detrás de Escenas de El Universo Cinematográfico",
     seoDescription: "Sumérgete en el proceso creativo detrás de El Universo Cinematográfico. Descubre cómo se crearon las escenas más impactantes.",
-    ogImage: "/images/making-of-og.jpg",
+    ogImage: "/images/tron-10.jpg",
     url: "/piezas/making-of-detras-escenas",
     body: {
       code: `
@@ -204,7 +204,7 @@ Mantente atento para más contenido exclusivo:
     title: "Poster Oficial - Diseño y Concepto",
     slug: "poster-oficial-diseno",
     summary: "Explora el proceso creativo detrás del poster oficial. Desde el concepto inicial hasta el diseño final que captura la esencia de la película.",
-    cover: "/images/poster-cover.jpg",
+    cover: "/images/tron.jpg",
     mediaType: "image",
     tags: ["poster", "oficial", "diseño", "arte", "concepto"],
     phase: "post",
@@ -214,7 +214,7 @@ Mantente atento para más contenido exclusivo:
     featured: true,
     seoTitle: "Poster Oficial - Diseño y Concepto de El Universo Cinematográfico",
     seoDescription: "Explora el proceso creativo detrás del poster oficial. Desde el concepto inicial hasta el diseño final que captura la esencia de la película.",
-    ogImage: "/images/poster-og.jpg",
+    ogImage: "/images/tron.jpg",
     url: "/piezas/poster-oficial-diseno",
     body: {
       code: `
