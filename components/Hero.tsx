@@ -32,6 +32,18 @@ export function Hero({
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
 
+  const handleVideoEnd = useCallback(() => {
+    setIsPlaying(false)
+    if (timerRef.current) {
+      clearTimeout(timerRef.current)
+      timerRef.current = null
+    }
+    // Restaurar el iframe a su estado inicial
+    if (iframeRef.current && videoUrl) {
+      iframeRef.current.src = `${videoUrl}?autoplay=0&mute=1&controls=1&showinfo=0&rel=0&enablejsapi=1`
+    }
+  }, [videoUrl])
+
   // Función para manejar mensajes del iframe de YouTube
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -46,18 +58,6 @@ export function Hero({
     window.addEventListener('message', handleMessage)
     return () => window.removeEventListener('message', handleMessage)
   }, [handleVideoEnd])
-
-  const handleVideoEnd = useCallback(() => {
-    setIsPlaying(false)
-    if (timerRef.current) {
-      clearTimeout(timerRef.current)
-      timerRef.current = null
-    }
-    // Restaurar el iframe a su estado inicial
-    if (iframeRef.current && videoUrl) {
-      iframeRef.current.src = `${videoUrl}?autoplay=0&mute=1&controls=1&showinfo=0&rel=0&enablejsapi=1`
-    }
-  }, [videoUrl])
 
   const handlePlayVideo = () => {
     if (videoUrl && iframeRef.current) {

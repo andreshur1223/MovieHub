@@ -4,13 +4,13 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useComments, Comment } from '@/lib/CommentsContext'
+import { useComments, Comment as CommentType } from '@/lib/CommentsContext'
 
 export function CommentsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
   
   // Intentar usar el contexto, pero usar datos de ejemplo si no está disponible
-  let comments: Comment[] = []
+  let comments: CommentType[] = []
   try {
     const commentsContext = useComments()
     comments = commentsContext.comments
