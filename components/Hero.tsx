@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Play, ArrowRight, Pause } from 'lucide-react'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 
 interface HeroProps {
   title: string
@@ -45,9 +45,9 @@ export function Hero({
 
     window.addEventListener('message', handleMessage)
     return () => window.removeEventListener('message', handleMessage)
-  }, [])
+  }, [handleVideoEnd])
 
-  const handleVideoEnd = () => {
+  const handleVideoEnd = useCallback(() => {
     setIsPlaying(false)
     if (timerRef.current) {
       clearTimeout(timerRef.current)
@@ -57,7 +57,7 @@ export function Hero({
     if (iframeRef.current && videoUrl) {
       iframeRef.current.src = `${videoUrl}?autoplay=0&mute=1&controls=1&showinfo=0&rel=0&enablejsapi=1`
     }
-  }
+  }, [videoUrl])
 
   const handlePlayVideo = () => {
     if (videoUrl && iframeRef.current) {

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useComments } from '@/lib/CommentsContext'
+import { useComments, Comment } from '@/lib/CommentsContext'
 
 export function CommentsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
